@@ -1,0 +1,70 @@
+# Binaries
+# Go build artifacts
+bin/
+build/
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+/openagent
+/openagent-test
+cmd/**/workspace
+
+# Picoclaw specific
+.openagent/
+config.json
+sessions/
+
+# Coverage
+coverage.txt
+coverage.html
+
+# Secrets & Config (keep templates, ignore actual secrets)
+.env
+config/config.json
+.security.yml
+onboard
+
+# Test
+
+# OS
+.DS_Store
+
+# Plans
+docs/plans/
+docs/superpowers/
+
+# Editors
+.vscode/
+.idea/
+
+# Added by goreleaser init:
+dist/
+*.vite/
+
+# Windows Application Icon/Resource
+*.syso
+
+# Test telegram integration
+cmd/telegram/
+
+# Keep embedded backend dist directory placeholder in VCS
+!web/backend/dist/
+web/backend/dist/*
+!web/backend/dist/.gitkeep
+
+# Auto-generated files
+web/frontend/src/routeTree.gen.ts
+
+# Runtime data
+workspace/memory/
+workspace/skills/
+
+.claude/
+
+docker/data
+
+.omc/
+**/.omc/

@@ -1,0 +1,12 @@
+FROM alpine:3.21
+
+ARG TARGETPLATFORM
+
+RUN apk add --no-cache ca-certificates tzdata
+
+COPY $TARGETPLATFORM/openagent /usr/local/bin/openagent
+COPY $TARGETPLATFORM/openagent-launcher /usr/local/bin/openagent-launcher
+COPY $TARGETPLATFORM/openagent-launcher-tui /usr/local/bin/openagent-launcher-tui
+
+ENTRYPOINT ["openagent-launcher"]
+CMD ["-console", "-public", "-no-browser"]

@@ -1,0 +1,44 @@
+services:
+  # ─────────────────────────────────────────────
+  # OpenAgent Agent (one-shot query) - Full MCP Support
+  #   docker compose -f docker/docker-compose.full.yml run --rm openagent-agent -m "Hello"
+  # ─────────────────────────────────────────────
+  openagent-agent:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.full
+    container_name: openagent-agent-full
+    profiles:
+      - agent
+    volumes:
+      - ../config/config.json:/root/.openagent/config.json:ro
+      - openagent-workspace:/root/.openagent/workspace
+      - openagent-npm-cache:/root/.npm # npm cache for faster MCP server installs
+    entrypoint: ["openagent", "agent"]
+    stdin_open: true
+    tty: true
+
+  # ─────────────────────────────────────────────
+  # OpenAgent Gateway (Long-running Bot) - Full MCP Support
+  #   docker compose -f docker/docker-compose.full.yml --profile gateway up
+  # ─────────────────────────────────────────────
+  openagent-gateway:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.full
+    container_name: openagent-gateway-full
+    restart: unless-stopped
+    profiles:
+      - gateway
+    volumes:
+      # Configuration file
+      - ../config/config.json:/root/.openagent/config.json:ro
+      # Persistent workspace (sessions, memory, logs)
+      - openagent-workspace:/root/.openagent/workspace
+      # NPM cache for faster MCP server installs
+      - openagent-npm-cache:/root/.npm
+    command: ["gateway"]
+
+volumes:
+  openagent-workspace:
+  openagent-npm-cache: # Cache npm packages to speed up MCP server installations

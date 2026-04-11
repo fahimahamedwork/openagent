@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=OpenAgent Launcher
+Comment=Web-based configuration and management UI for OpenAgent
+Exec=openagent-launcher
+Icon=openagent-launcher
+Terminal=true
+Type=Application
+Categories=Utility;Network;
+Keywords=openagent;ai;agent;bot;
